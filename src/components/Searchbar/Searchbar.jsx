@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { FcSearch } from 'react-icons/fc';
 import { toast } from 'react-toastify';
