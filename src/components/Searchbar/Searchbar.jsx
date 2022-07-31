@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { FcSearch } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 import {
@@ -9,44 +9,40 @@ import {
   SearchFormInput,
 } from './Searchbar.styled';
 
-export default class Searchbar extends Component {
-  state = {
-    searchItem: '',
+export default function Searchbar({ onSubmit }) {
+  const [searchItem, setSearchItem] = useState('');
+
+  const handleNameChange = event => {
+    setSearchItem(event.currentTarget.value.toLowerCase());
   };
 
-  handleNameChange = event => {
-    this.setState({ searchItem: event.currentTarget.value.toLowerCase() });
-  };
-
-  handleFormSubmit = event => {
+  const handleFormSubmit = event => {
     event.preventDefault();
 
-    if (this.state.searchItem.trim() === '') {
+    if (searchItem.trim() === '') {
       toast.error('Упс, введи назву зображення!');
       return;
     }
-    this.setState({ searchItem: '' });
-    this.props.onSubmit(this.state.searchItem);
+    onSubmit(searchItem);
+    setSearchItem('');
   };
 
-  render() {
-    return (
-      <SearchbarHeader>
-        <SearchForm onSubmit={this.handleFormSubmit}>
-          <SearchBtn type="submit">
-            <FcSearch />
-            <SearchFormSpan></SearchFormSpan>
-          </SearchBtn>
+  return (
+    <SearchbarHeader>
+      <SearchForm onSubmit={handleFormSubmit}>
+        <SearchBtn type="submit">
+          <FcSearch />
+          <SearchFormSpan></SearchFormSpan>
+        </SearchBtn>
 
-          <SearchFormInput
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            onChange={this.handleNameChange}
-          />
-        </SearchForm>
-      </SearchbarHeader>
-    );
-  }
+        <SearchFormInput
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          onChange={handleNameChange}
+        />
+      </SearchForm>
+    </SearchbarHeader>
+  );
 }
