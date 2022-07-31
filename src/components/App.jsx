@@ -12,7 +12,6 @@ export default function App() {
   const [searchItem, setSearchItem] = useState('');
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState('idle');
-  const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [imageModal, setImageModal] = useState(null);
