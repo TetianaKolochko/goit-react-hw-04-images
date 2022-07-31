@@ -29,7 +29,6 @@ export default function App() {
         setPage(1);
       })
       .catch(error => {
-        setError(error);
         setStatus(error, 'rejected');
       });
   }, [searchItem]);
